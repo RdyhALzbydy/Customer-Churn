@@ -1,0 +1,134 @@
+{
+  "data_summary": {
+    "total_records": 278154,
+    "unique_users": 225,
+    "unique_sessions": 2312,
+    "date_range": {
+      "start": "2018-10-01T00:01:57",
+      "end": "2018-12-03T01:11:16",
+      "duration_days": 63
+    },
+    "features_created": 29,
+    "churn_rates": {
+      "cancellation": 23.11,
+      "downgrade": 21.78,
+      "combined": 40.89,
+      "inactivity": 49.78
+    }
+  },
+  "best_models": {
+    "combined": {
+      "model_name": "LogisticRegression",
+      "auc_score": 0.8539,
+      "precision": 0.7647,
+      "recall": 0.7222,
+      "f1_score": 0.7429
+    },
+    "cancellation": {
+      "model_name": "LogisticRegression",
+      "auc_score": 0.7029,
+      "precision": 1.0,
+      "recall": 0.1,
+      "f1_score": 0.1818
+    },
+    "downgrade": {
+      "model_name": "RandomForest",
+      "auc_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "inactivity": {
+      "model_name": "LogisticRegression",
+      "auc_score": 0.7628,
+      "precision": 0.7143,
+      "recall": 0.6818,
+      "f1_score": 0.6977
+    }
+  },
+  "model_performance": {
+    "combined": {
+      "RandomForest": {
+        "test_auc": 0.8209876543209877,
+        "test_precision": 0.8461538461538461,
+        "test_recall": 0.6111111111111112,
+        "test_f1": 0.7096774193548387,
+        "cv_mean": 0.8045273368606702,
+        "cv_std": 0.09431278462348743
+      },
+      "LogisticRegression": {
+        "test_auc": 0.8539094650205761,
+        "test_precision": 0.7647058823529411,
+        "test_recall": 0.7222222222222222,
+        "test_f1": 0.7428571428571429,
+        "cv_mean": 0.8279775132275132,
+        "cv_std": 0.04407419479680105
+      }
+    },
+    "cancellation": {
+      "RandomForest": {
+        "test_auc": 0.6842857142857143,
+        "test_precision": 0.0,
+        "test_recall": 0.0,
+        "test_f1": 0.0,
+        "cv_mean": 0.6304347826086957,
+        "cv_std": 0.043162860744077394
+      },
+      "LogisticRegression": {
+        "test_auc": 0.7028571428571428,
+        "test_precision": 1.0,
+        "test_recall": 0.1,
+        "test_f1": 0.18181818181818182,
+        "cv_mean": 0.6759834368530021,
+        "cv_std": 0.047035993013815065
+      }
+    },
+    "downgrade": {
+      "RandomForest": {
+        "test_auc": 1.0,
+        "test_precision": 1.0,
+        "test_recall": 1.0,
+        "test_f1": 1.0,
+        "cv_mean": 0.9994544462629569,
+        "cv_std": 0.0007715294939296604
+      },
+      "LogisticRegression": {
+        "test_auc": 1.0,
+        "test_precision": 1.0,
+        "test_recall": 1.0,
+        "test_f1": 1.0,
+        "cv_mean": 1.0,
+        "cv_std": 0.0
+      }
+    },
+    "inactivity": {
+      "RandomForest": {
+        "test_auc": 0.7322134387351779,
+        "test_precision": 0.7,
+        "test_recall": 0.6363636363636364,
+        "test_f1": 0.6666666666666666,
+        "cv_mean": 0.7698148148148148,
+        "cv_std": 0.058749543966942645
+      },
+      "LogisticRegression": {
+        "test_auc": 0.7628458498023716,
+        "test_precision": 0.7142857142857143,
+        "test_recall": 0.6818181818181818,
+        "test_f1": 0.6976744186046512,
+        "cv_mean": 0.7474074074074073,
+        "cv_std": 0.03371794570886236
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "type": "urgent",
+      "title": "معدل انسحاب مرتفع جداً",
+      "description": "معدل الانسحاب 40.89% يتطلب تدخل فوري"
+    }
+  ],
+  "processing_info": {
+    "processed_at": "2025-08-26T21:35:41.147957",
+    "processing_version": "2.0.0"
+  }
+}

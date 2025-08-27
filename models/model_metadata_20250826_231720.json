@@ -1,0 +1,7 @@
+{
+  "model_name": "RandomForest",
+  "auc_score": 1.0,
+  "timestamp": "20250826_231720",
+  "model_path": "/home/radyah/Thmanyah/radhiyah-projct/radhiyah-projct/models/saved_models/best_model_RandomForest_20250826_231720.joblib",
+  "scaler_path": null
+}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}نتائج التحليل - رضية{% endblock %}
+
+{% block content %}
+<section class="results-section">
+    <div class="results-header">
+        <h1 class="section-title">
+            <i class="fas fa-chart-bar"></i>
+            نتائج تحليل البيانات
+        </h1>
+        <div class="results-actions">
+            <button class="btn btn-primary" onclick="exportResults()">
+                <i class="fas fa-download"></i>
+                تصدير التقرير
+            </button>
+            <a href="/upload" class="btn btn-secondary">
+                <i class="fas fa-upload"></i>
+                رفع ملف جديد
+            </a>
+        </div>
+    </div>
+
+    <div class="results-container" id="results-container">
+        <div class="loading-results">
+            <div class="spinner"></div>
+            <p>جاري تحميل النتائج...</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/results.css">
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/results.js"></script>
+<script>
+    const jobId = "{{ job_id }}";
+    loadResults(jobId);
+</script>
+{% endblock %}

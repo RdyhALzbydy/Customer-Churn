@@ -1,0 +1,7 @@
+{
+  "model_name": "RandomForest",
+  "auc_score": 1.0,
+  "timestamp": "20250826_080429",
+  "model_path": "/models/saved_models/best_model_RandomForest_20250826_080429.joblib",
+  "scaler_path": null
+}

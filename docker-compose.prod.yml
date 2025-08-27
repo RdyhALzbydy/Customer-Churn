@@ -1,0 +1,119 @@
+version: '3.8'
+
+services:
+  radiya-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: radiya_api_prod
+    ports:
+      - "8000:8000"
+    volumes:
+      - model_data:/app/models
+      - log_data:/app/logs
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=WARNING
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - MLFLOW_TRACKING_URI=http://mlflow:5500
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+    restart: always
+    depends_on:
+      - redis
+      - postgres
+      - mlflow
+    networks:
+      - radiya-network
+
+  radiya_training:
+    build:
+      context: .
+      dockerfile: Dockerfile.training
+    container_name: radiya_training
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5500
+    command: python run_radiya.py
+    depends_on:
+      - mlflow
+    restart: always
+    networks:
+      - radiya-network
+
+  mlflow:
+    image: python:3.9
+    container_name: radiya_mlflow
+    ports:
+      - "5500:5500"
+    volumes:
+      - ./mlruns:/app/mlruns
+      - ./mlflow_data:/app/data
+    working_dir: /app
+    environment:
+      - MLFLOW_BACKEND_STORE_URI=sqlite:////app/data/mlflow.db
+      - MLFLOW_ARTIFACTS_DESTINATION=/app/mlruns
+    command: >
+      bash -c "pip install mlflow && 
+               mlflow server --host 0.0.0.0 --port 5500 --backend-store-uri sqlite:////app/data/mlflow.db --default-artifact-root /app/mlruns"
+    restart: always
+    networks:
+      - radiya-network
+
+  redis:
+    image: redis:alpine
+    container_name: radiya_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+    networks:
+      - radiya-network
+
+  postgres:
+    image: postgres:13
+    container_name: radiya_postgres
+    environment:
+      - POSTGRES_DB=radiya
+      - POSTGRES_USER=radiya
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - radiya-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: radiya_nginx
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - radiya-api
+    restart: always
+    networks:
+      - radiya-network
+
+networks:
+  radiya-network:
+    driver: bridge
+
+volumes:
+  model_data:
+  log_data:
+  redis_data:
+  postgres_data:

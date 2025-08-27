@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Data files
+*.json
+*.csv
+*.parquet
+data/raw/*
+!data/raw/.gitkeep
+
+# Models
+models/saved_models/*.joblib
+models/saved_models/*.pkl
+models/scalers/*.joblib
+
+# Logs
+logs/*.log
+*.log
+
+# MLflow
+mlruns/
+mlartifacts/
+*.db
+
+# Reports
+reports/figures/*.html
+reports/figures/*.png
+reports/metrics/*.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

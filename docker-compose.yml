@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  radiya-api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: radiya_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+      - ./mlflow_data:/mlflow/data:z
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=INFO
+      - DATA_PATH=data/raw/customer_churn_mini.json
+      - MODEL_SAVE_PATH=models/saved_models/
+      - MLFLOW_TRACKING_URI=http://mlflow:5500
+    depends_on:
+      - mlflow
+    restart: unless-stopped
+    networks:
+      - radiya-network
+    
+  radiya-training:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: radiya_training
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+    environment:
+      - PYTHONPATH=/app
+      - DATA_PATH=data/raw/customer_churn_mini.json
+      - MLFLOW_TRACKING_URI=http://mlflow:5500
+    command: python run_radiya.py
+    depends_on:
+      - mlflow
+    networks:
+      - radiya-network
+    profiles:
+      - training
+    
+  mlflow:
+    image: python:3.9
+    container_name: radiya_mlflow
+    ports:
+      - "5500:5500"
+    volumes:
+      - ./mlruns:/app/mlruns
+      - ./mlflow_data:/app/data:z
+    working_dir: /app
+    environment:
+      - MLFLOW_BACKEND_STORE_URI=sqlite:////app/data/mlflow.db
+      - MLFLOW_ARTIFACTS_DESTINATION=/app/mlruns
+    command: >
+      bash -c "pip install mlflow && 
+               mlflow server --host 0.0.0.0 --port 5500 --backend-store-uri sqlite:////app/data/mlflow.db --default-artifact-root /app/mlruns"
+    restart: unless-stopped
+    networks:
+      - radiya-network
+    profiles:
+      - mlflow
+
+  nginx:
+    image: nginx:alpine
+    container_name: radiya_nginx
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d:ro
+    depends_on:
+      - radiya-api
+    restart: always
+    networks:
+      - radiya-network
+    profiles:
+      - production
+
+networks:
+  radiya-network:
+    driver: bridge
+
+volumes:
+  mlflow_data:
+  model_data:
