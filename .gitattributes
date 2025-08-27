@@ -1,0 +1,2 @@
+data/raw/*.json filter=lfs diff=lfs merge=lfs -text
+data/uploads/*.json filter=lfs diff=lfs merge=lfs -text
