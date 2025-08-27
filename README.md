@@ -18,6 +18,7 @@
 
 [![GitHub Stars](https://img.shields.io/github/stars/RdyhALzbydy/Customer-Churn?style=social)](https://github.com/RdyhALzbydy/Customer-Churn)
 [![GitHub Forks](https://img.shields.io/github/forks/RdyhALzbydy/Customer-Churn?style=social)](https://github.com/RdyhALzbydy/Customer-Churn/fork)
+<img width="1536" height="1024" alt="ChatGPT Image 26 أغسطس 2025، 05_50_04 م" src="https://github.com/user-attachments/assets/7d59b571-ed29-4d35-9cc5-50d555c45885" />
 
 </div>
 
@@ -48,13 +49,11 @@
 - 🎯 **دقة عالية**: نتائج تصل إلى 88% AUC مع نماذج محسّنة
 - ⚡ **قابلية التوسع**: مصمم للتعامل مع البيانات الكبيرة
 - 🔄 **مرونة كاملة**: من التدريب إلى النشر والتطبيق
-
 - 🚀 **جاهز للإنتاج**: نشر سهل عبر Docker و docker-compose
 - 🌐 **واجهات متعددة**: API + Web Interface للاستخدام المتنوع
 
 ---
 
-<img width="1536" height="1024" alt="ChatGPT Image 26 أغسطس 2025، 05_50_04 م" src="https://github.com/user-attachments/assets/7d59b571-ed29-4d35-9cc5-50d555c45885" />
 ### ✨ المزايا الرئيسية
 
 #### 📊 معالجة البيانات المتقدمة
