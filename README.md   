@@ -1,531 +1,0 @@
-# 🎵 Radiya - Customer Churn Prediction System
-
-<div align="center">
-
-![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Machine Learning](https://img.shields.io/badge/ML-Scikit--Learn-orange.svg)
-![API](https://img.shields.io/badge/API-FastAPI-009688.svg)
-![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)
-
-**نظام شامل للتنبؤ بانسحاب العملاء من منصات البث الموسيقي**
-
-[English](#english) | [العربية](#arabic)
-
-</div>
-
----
-
-## 📋 جدول المحتويات
-
-- [نظرة عامة](#نظرة-عامة)
-- [المزايا الرئيسية](#المزايا-الرئيسية)
-- [التقنيات المستخدمة](#التقنيات-المستخدمة)
-- [التثبيت السريع](#التثبيت-السريع)
-- [الاستخدام](#الاستخدام)
-- [النتائج والدقة](#النتائج-والدقة)
-- [API Documentation](#api-documentation)
-- [النشر](#النشر)
-- [المساهمة](#المساهمة)
-
----
-
-## 🎯 نظرة عامة {#نظرة-عامة}
-
-**Radiya** هو نظام ذكي متكامل للتنبؤ بانسحاب العملاء من منصات البث الموسيقي. يستخدم تقنيات الذكاء الاصطناعي المتقدمة لتحليل سلوك المستخدمين والتنبؤ بمن هم الأكثر عرضة لإلغاء اشتراكهم.
-
-### 🎪 لماذا Radiya؟
-
-- **دقة عالية**: يحقق دقة تصل إلى 88% في التنبؤ
-- **شامل**: من التحليل إلى النشر في نظام واحد
-- **قابل للتوسع**: مصمم للعمل مع البيانات الكبيرة
-- **سهل الاستخدام**: واجهة API بسيطة ووثائق شاملة
-
-## ✨ المزايا الرئيسية {#المزايا-الرئيسية}
-
-### 🤖 نماذج متقدمة
-- **6 خوارزميات مختلفة**: Random Forest, XGBoost, LightGBM, Logistic Regression, SVM, Gradient Boosting
-- **معالجة عدم التوازن**: تقنيات SMOTE و ADASYN
-- **4 طرق تعريف الانسحاب**: إلغاء، تخفيض، مدمج، عدم نشاط
-
-### 📊 هندسة ميزات متقدمة
-- **60+ ميزة مهندسة**: تغطي جميع جوانب سلوك المستخدم
-- **ميزات زمنية**: أنماط الاستخدام والاتجاهات
-- **ميزات تفاعلية**: الإعجاب، القوائم، الأصدقاء
-- **ميزات ديموغرافية**: الجنس، الموقع، نوع الاشتراك
-
-### 🚀 نظام متكامل
-- **تحليل شامل**: من البيانات الخام إلى النتائج النهائية
-- **API سريع**: FastAPI مع وثائق تفاعلية
-- **مراقبة ذكية**: اكتشاف انحراف البيانات
-- **نشر سهل**: Docker و Docker Compose
-
-## 🛠 التقنيات المستخدمة {#التقنيات-المستخدمة}
-
-<table>
-<tr>
-<td><strong>المجال</strong></td>
-<td><strong>التقنية</strong></td>
-<td><strong>الغرض</strong></td>
-</tr>
-<tr>
-<td>Machine Learning</td>
-<td>scikit-learn, XGBoost, LightGBM</td>
-<td>خوارزميات التعلم الآلي</td>
-</tr>
-<tr>
-<td>Data Processing</td>
-<td>pandas, numpy</td>
-<td>معالجة وتحليل البيانات</td>
-</tr>
-<tr>
-<td>Data Balancing</td>
-<td>imbalanced-learn</td>
-<td>معالجة عدم توازن البيانات</td>
-</tr>
-<tr>
-<td>API Framework</td>
-<td>FastAPI, Uvicorn</td>
-<td>واجهة برمجة التطبيقات</td>
-</tr>
-<tr>
-<td>Visualization</td>
-<td>plotly, seaborn, matplotlib</td>
-<td>الرسوم البيانية التفاعلية</td>
-</tr>
-<tr>
-<td>Model Management</td>
-<td>MLflow</td>
-<td>تتبع النماذج والتجارب</td>
-</tr>
-<tr>
-<td>Containerization</td>
-<td>Docker, Docker Compose</td>
-<td>النشر والحاويات</td>
-</tr>
-<tr>
-<td>Code Quality</td>
-<td>Black, Ruff</td>
-<td>جودة ونظافة الكود</td>
-</tr>
-</table>
-
-## 🚀 التثبيت السريع {#التثبيت-السريع}
-
-### المتطلبات الأساسية
-- Python 3.9+
-- Git
-- Docker (اختياري للنشر)
-
-### التثبيت المحلي
-
-```bash
-# 1. استنساخ المشروع
-git clone https://github.com/your-username/radiya.git
-cd radiya
-
-# 2. إنشاء البيئة الافتراضية
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# أو
-venv\Scripts\activate     # Windows
-
-# 3. تثبيت المتطلبات
-pip install -r requirements.txt
-
-# 4. وضع البيانات
-# ضع ملف customer_churn_mini.json في:
-# data/raw/customer_churn_mini.json
-
-# 5. التشغيل السريع
-python run_radiya.py
-```
-
-### النشر بـ Docker
-
-```bash
-# بناء وتشغيل النظام
-docker-compose up --build
-
-# الخدمات المتاحة:
-# - API: http://localhost:8000
-# - MLflow: http://localhost:5000
-# - وثائق API: http://localhost:8000/docs
-```
-
-## 📖 الاستخدام {#الاستخدام}
-
-### 1. التحليل والتدريب الكامل
-
-```bash
-# تشغيل التحليل الكامل
-python run_radiya.py
-
-# النتائج ستكون في:
-# - models/saved_models/     # النماذج المدربة
-# - reports/metrics/         # تقارير النتائج
-# - logs/                    # ملفات السجل
-```
-
-### 2. تشغيل API
-
-```bash
-# تشغيل خدمة API
-uvicorn src.radiya.api.main:app --host 0.0.0.0 --port 8000
-uvicorn src.radiya.api.main:app --reload --host 0.0.0.0 --port 8000
-
-# أو استخدم Docker
-docker-compose up radiya-api
-```
-
-### 3. استخدام API
-
-```python
-import requests
-
-# التنبؤ لمستخدم واحد
-user_data = {
-    "userId": "user123",
-    "total_events": 150,
-    "songs_played": 100,
-    "thumbs_up": 10,
-    "final_level_paid": 1,
-    # ... باقي الميزات
-}
-
-response = requests.post("http://localhost:8000/predict", json=user_data)
-result = response.json()
-
-print(f"احتمالية الانسحاب: {result['churn_probability']:.2f}")
-print(f"مستوى المخاطرة: {result['risk_level']}")
-```
-
-### 4. استخدام النماذج المحفوظة
-
-```python
-import joblib
-import pandas as pd
-
-# تحميل النموذج
-model = joblib.load('models/saved_models/best_model_XGBoost_*.joblib')
-
-# التنبؤ
-features = pd.DataFrame([user_features])
-probability = model.predict_proba(features)[0][1]
-```
-
-## 📊 النتائج والدقة {#النتائج-والدقة}
-
-### أداء النماذج المتوقع
-
-| النموذج | AUC Score | Precision | Recall | F1-Score | الوصف |
-|---------|-----------|-----------|--------|----------|---------|
-| **XGBoost** | 0.84-0.88 | 0.72-0.78 | 0.68-0.75 | 0.70-0.76 | الأفضل عادة |
-| **LightGBM** | 0.82-0.87 | 0.70-0.76 | 0.66-0.73 | 0.68-0.74 | سريع وفعال |
-| **Random Forest** | 0.79-0.85 | 0.68-0.74 | 0.64-0.71 | 0.66-0.72 | مستقر ومفسر |
-| **Logistic Regression** | 0.75-0.82 | 0.65-0.71 | 0.60-0.68 | 0.62-0.69 | بسيط وسريع |
-
-### مقاييس الأعمال
-
-- **تقليل معدل الانسحاب**: حتى 15%
-- **ROI للحملات المستهدفة**: 3-5x
-- **دقة التنبؤات**: 80-88%
-- **خفض التكاليف**: 20-30%
-
-## 🔌 API Documentation {#api-documentation}
-
-### المسارات الأساسية
-
-#### التنبؤ الفردي
-```bash
-POST /predict
-Content-Type: application/json
-
-{
-  "userId": "user123",
-  "total_events": 150,
-  "songs_played": 100,
-  "thumbs_up": 10,
-  "final_level_paid": 1,
-  "interaction_rate": 0.17
-}
-```
-
-**الاستجابة:**
-```json
-{
-  "userId": "user123",
-  "churn_probability": 0.23,
-  "risk_level": "Low",
-  "confidence": "High",
-  "timestamp": "2024-01-15T10:30:00Z"
-}
-```
-
-#### التنبؤ المجمع
-```bash
-POST /predict/batch
-Content-Type: application/json
-
-{
-  "users": [
-    { "userId": "user1", "total_events": 150, ... },
-    { "userId": "user2", "total_events": 75, ... }
-  ]
-}
-```
-
-#### الوثائق التفاعلية
-زر `http://localhost:8000/docs` للوثائق التفاعلية الكاملة.
-
-## 🐳 النشر {#النشر}
-
-### النشر المحلي
-
-```bash
-# تشغيل سريع
-python run_radiya.py
-
-# تشغيل API
-uvicorn src.radiya.api.main:app --reload
-```
-
-### النشر بـ Docker
-
-```bash
-# بناء الصورة
-docker build -t radiya:latest .
-
-# تشغيل جميع الخدمات
-podman-compose down
-podman-compose up -d
-
-
-
-podman-compose logs -f radiya-api
-
-mkdir -p ./mlflow-data
-chmod -R 777 ./mlflow-data
-
-
-sudo apt install -y policycoreutils
-
-
-sudo restorecon -R -v ./mlflow_data ./mlruns ./data ./models ./logs ./reports
-sudo chcon -R -t container_file_t ./mlflow_data ./mlruns ./data ./models ./logs ./reports
-
-
-podman-compose up -d
-
-
-podman ps -a
-podman inspect radiya_mlflow
-podman-compose logs -f mlflow
-
-
-podman ps -a
-podman logs radiya_nginx
-podman logs radiya_training
-podman-compose logs -f mlflow
-ls -l ./mlflow_data/mlflow.db
-
-
-
-podman-compose logs -f mlflow
-
-
-
-# الخدمات المتاحة:
-# - radiya-api: المنفذ 8000
-# - mlflow: المنفذ 5000
-```
-
-### النشر على الإنتاج
-
-```bash
-# للإنتاج مع Gunicorn
-docker-compose -f docker-compose.prod.yml up -d
-
-# مع قواعد بيانات خارجية
-export DATABASE_URL="postgresql://user:pass@host:5432/radiya"
-docker-compose up -d
-```
-
-### متغيرات البيئة
-
-```bash
-# .env
-PROJECT_NAME=radiya
-DATA_PATH=data/raw/customer_churn_mini.json
-MODEL_SAVE_PATH=models/saved_models/
-MLFLOW_TRACKING_URI=sqlite:///mlflow.db
-API_HOST=0.0.0.0
-API_PORT=8000
-LOG_LEVEL=INFO
-```
-
-## 📁 هيكل المشروع
-
-```
-radiya/
-├── 📊 data/
-│   ├── raw/customer_churn_mini.json     # البيانات الأصلية
-│   └── processed/                       # البيانات المعالجة
-├── 🧠 src/radiya/
-│   ├── data/                           # معالجة البيانات
-│   ├── models/                         # النماذج
-│   ├── api/                            # واجهة API
-│   └── utils/                          # أدوات مساعدة
-├── 🐳 docker-compose.yml               # إعداد Docker
-├── 📋 requirements.txt                 # المتطلبات
-├── 🚀 run_radiya.py                    # التشغيل الرئيسي
-├── 📊 models/                          # النماذج المحفوظة
-├── 📈 reports/                         # التقارير والنتائج
-└── 🧪 tests/                           # الاختبارات
-```
-
-## 🔧 استكشاف الأخطاء
-
-### مشاكل شائعة
-
-**1. خطأ في تحميل البيانات:**
-```bash
-FileNotFoundError: customer_churn_mini.json
-```
-**الحل:** ضع الملف في `data/raw/customer_churn_mini.json`
-
-**2. خطأ في الاستيراد:**
-```bash
-ModuleNotFoundError: No module named 'radiya'
-```
-**الحل:** تأكد من ملفات `__init__.py` وتشغيل `pip install -e .`
-
-**3. مشكلة في النموذج:**
-```bash
-No model loaded
-```
-**الحل:** شغل التدريب أولاً: `python run_radiya.py`
-
-### فحص النظام
-
-```bash
-# اختبار شامل للنظام
-python -c "
-import pandas as pd
-from pathlib import Path
-print('✅ pandas يعمل')
-print(f'📁 البيانات موجودة: {Path("data/raw/customer_churn_mini.json").exists()}')
-
-try:
-    from radiya.data.loader import DataLoader
-    print('✅ الاستيراد يعمل')
-except:
-    print('❌ مشكلة في الاستيراد')
-"
-```
-
-## 🤝 المساهمة {#المساهمة}
-
-نرحب بالمساهمات! اتبع هذه الخطوات:
-
-1. **Fork** المشروع
-2. إنشاء فرع للميزة (`git checkout -b feature/amazing-feature`)
-3. تطبيق التغييرات (`git commit -m 'Add amazing feature'`)
-4. دفع للفرع (`git push origin feature/amazing-feature`)
-5. إنشاء **Pull Request**
-
-### إرشادات التطوير
-
-```bash
-# تثبيت أدوات التطوير
-pip install -r requirements-dev.txt
-
-# تشغيل الاختبارات
-pytest
-
-# فحص جودة الكود
-black src/
-ruff check src/
-
-# تشغيل جميع الفحوصات
-make test lint format
-```
-
-## 📄 الترخيص
-
-هذا المشروع مرخص تحت [رخصة MIT](LICENSE) - راجع الملف للتفاصيل.
-
-## 🙏 الشكر والتقدير
-
-- **Sparkify Dataset** - بيانات تدريبية ممتازة
-- **Open Source Community** - للأدوات والمكتبات الرائعة
-- **FastAPI** - إطار عمل API سريع وحديث
-- **scikit-learn** - مكتبة التعلم الآلي الأساسية
-
-## 📞 التواصل
-
-- **المطور**: Eng. Radiya
-- **البريد الإلكتروني**: rdyhalzbydy@gmail.com
-- **GitHub**: [github.com/your-username/radiya](https://github.com/RdyhALzbydy/radiya)
-- **LinkedIn**: [linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)
-
----
-
-## 📚 موارد إضافية
-
-- [دليل المطور الكامل](docs/developer-guide.md)
-- [وثائق API التفصيلية](docs/api-detailed.md)
-- [أمثلة متقدمة](examples/)
-- [دليل الإنتاج](docs/production-guide.md)
-
----
-
-<div align="center">
-
-**⭐ إذا أعجبك المشروع، لا تنسى إعطاء نجمة!**
-
-Made with ❤️ for the ML Community
-
-</div>
-
----
-
-# English {#english}
-
-## 🎵 Radiya - Customer Churn Prediction System
-
-A comprehensive machine learning system for predicting customer churn in music streaming platforms.
-
-### 🚀 Quick Start
-
-```bash
-git clone https://github.com/RdyhALzbydy/radiya.git
-cd radiya
-pip install -r requirements.txt
-python run_radiya.py
-```
-
-### 🛠 Technologies Used
-
-- **Machine Learning**: scikit-learn, XGBoost, LightGBM
-- **Data Processing**: pandas, numpy
-- **API**: FastAPI
-- **Deployment**: Docker
-- **Monitoring**: MLflow
-
-### 📊 Performance
-
-- **AUC Score**: 0.84-0.88
-- **Accuracy**: 80-88%
-- **Models**: 6 different algorithms
-- **Features**: 60+ engineered features
-
-### 🔗 Links
-
-- [API Documentation](http://localhost:8000/docs)
-- [MLflow Dashboard](http://localhost:5000)
-- [GitHub Repository](https://github.com/your-username/radiya)
-
----
-
-*This project is developed as part of a machine learning portfolio to demonstrate advanced MLOps practices and customer analytics capabilities.*
