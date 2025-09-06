@@ -32,11 +32,25 @@ except ImportError as e:
 # إعداد MLflow
 try:
     import mlflow
-    mlflow.set_tracking_uri("sqlite:///radiya_experiments.db")
+    import os
+    
+    # استخدام MLflow server إذا كان متوفراً، وإلا استخدام SQLite محلي
+    tracking_uri = os.getenv('MLFLOW_TRACKING_URI', 'sqlite:///radiya_experiments.db')
+    mlflow.set_tracking_uri(tracking_uri)
     mlflow.set_experiment("radiya_churn_prediction")
+    
+    print(f"✅ MLflow configured with URI: {tracking_uri}")
 except ImportError:
     print("تحذير: MLflow غير متوفر، لن يتم تسجيل التجارب")
     mlflow = None
+except Exception as e:
+    print(f"تحذير: خطأ في إعداد MLflow: {e}")
+    print("سيتم استخدام SQLite محلي")
+    try:
+        mlflow.set_tracking_uri("sqlite:///radiya_experiments.db")
+        mlflow.set_experiment("radiya_churn_prediction")
+    except:
+        mlflow = None
 
 # إعداد نظام السجلات
 def setup_logging():

@@ -1,0 +1,101 @@
+# Pre-commit configuration for Radiya project
+repos:
+  # Ruff linter and formatter
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.6
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        types_or: [python, pyi, jupyter]
+      - id: ruff-format
+        types_or: [python, pyi, jupyter]
+
+  # Black code formatter
+  - repo: https://github.com/psf/black
+    rev: 23.11.0
+    hooks:
+      - id: black
+        language_version: python3
+        types: [python]
+
+  # isort import sorting
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: [--profile=black, --line-length=100]
+        types: [python]
+
+  # Built-in pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '^.*\.md$'
+      - id: end-of-file-fixer
+        exclude: '^.*\.md$'
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: debug-statements
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: requirements-txt-fixer
+      - id: fix-byte-order-marker
+
+  # Check for common security issues
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        args: [-r, src/, -f, json, -o, bandit-report.json]
+        files: ^src/.*\.py$
+        exclude: ^tests/.*
+
+  # MyPy type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.7.1
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-all]
+        args: [--config-file=pyproject.toml]
+        files: ^src/.*\.py$
+
+  # Check for secrets
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args: [--baseline, .secrets.baseline]
+        exclude: package.lock.json
+
+  # Docker linting
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint-docker
+        args: [--ignore, DL3008, --ignore, DL3009]
+
+  # Validate GitHub workflows
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.27.2
+    hooks:
+      - id: check-github-workflows
+
+# Configuration
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ''
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false

@@ -1,6 +1,6 @@
-from fastapi import APIRouter, HTTPException
-from typing import Dict, Any
 import logging
+
+from fastapi import APIRouter
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 @router.get("/analysis/summary")
 async def get_analysis_summary():
     """الحصول على ملخص التحليل"""
-    
+
     return {
         "total_predictions": 0,
         "high_risk_users": 0,
@@ -19,7 +19,7 @@ async def get_analysis_summary():
 @router.get("/models/performance")
 async def get_models_performance():
     """الحصول على أداء النماذج"""
-    
+
     return {
         "models": [
             {

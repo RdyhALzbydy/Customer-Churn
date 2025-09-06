@@ -1,0 +1,148 @@
+2025-09-06 06:18:34,331 - radiya_main - INFO - بدء تشغيل مشروع رضية
+2025-09-06 06:18:34,331 - radiya_main - INFO - المرحلة 1: تحليل البيانات
+2025-09-06 06:18:34,332 - radiya.data.loader - INFO - تحميل البيانات من: data/raw/customer_churn_mini.json
+2025-09-06 06:18:36,183 - radiya.data.loader - INFO - تم تحميل 286,500 سجل
+2025-09-06 06:18:36,183 - radiya.data.loader - INFO - معالجة أولية للبيانات...
+2025-09-06 06:18:36,351 - radiya.data.loader - INFO - تم حذف 8,346 سجل للمستخدمين المجهولين
+2025-09-06 06:18:36,718 - radiya.data.loader - INFO - البيانات المعالجة: 225 مستخدم، 278,154 سجل
+2025-09-06 06:18:37,168 - radiya_main - INFO - المرحلة 2: هندسة الميزات
+2025-09-06 06:18:37,169 - radiya.data.feature_engineer - INFO - بدء إنشاء الميزات الشاملة...
+2025-09-06 06:18:37,169 - radiya.data.feature_engineer - INFO - إنشاء ميزات المستخدمين...
+2025-09-06 06:18:41,505 - radiya.data.feature_engineer - INFO - تم إنشاء 42 ميزة لـ 225 مستخدم
+2025-09-06 06:18:41,509 - radiya.data.feature_engineer - INFO - تم إنشاء 41 ميزة نهائية
+2025-09-06 06:18:41,509 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: cancellation
+2025-09-06 06:18:41,539 - radiya.data.feature_engineer - INFO - المنسحبين: 52, المعدل: 23.11%
+2025-09-06 06:18:41,539 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: downgrade
+2025-09-06 06:18:41,568 - radiya.data.feature_engineer - INFO - المنسحبين: 49, المعدل: 21.78%
+2025-09-06 06:18:41,569 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: combined
+2025-09-06 06:18:41,610 - radiya.data.feature_engineer - INFO - المنسحبين: 92, المعدل: 40.89%
+2025-09-06 06:18:41,610 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: inactivity
+2025-09-06 06:18:41,645 - radiya.data.feature_engineer - INFO - المنسحبين: 112, المعدل: 49.78%
+2025-09-06 06:18:41,645 - radiya_main - INFO - المرحلة 3: تدريب النماذج
+2025-09-06 06:18:41,646 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: cancellation
+2025-09-06 06:18:41,647 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:18:41,647 - radiya.models.trainer - INFO - توزيع الفئات: {0: 173, 1: 52}
+2025-09-06 06:18:41,652 - radiya.models.trainer - INFO - تم إعداد MLflow experiment: radiya_churn_cancellation
+2025-09-06 06:18:41,653 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:18:41,653 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:18:41,653 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:18:41,653 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:18:41,711 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:18:43,171 - radiya.models.trainer - INFO - RandomForest - AUC: 0.8943, Precision: 0.7000, Recall: 0.7000, F1: 0.7000
+2025-09-06 06:18:44,785 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:18:44,785 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:18:44,789 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:18:44,789 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:18:44,794 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:18:45,486 - radiya.models.trainer - INFO - LogisticRegression - AUC: 0.9543, Precision: 0.7273, Recall: 0.8000, F1: 0.7619
+2025-09-06 06:18:47,063 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:18:47,063 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:18:47,063 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:18:47,064 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:18:47,070 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:18:48,531 - radiya.models.trainer - INFO - GradientBoosting - AUC: 0.9229, Precision: 0.7273, Recall: 0.8000, F1: 0.7619
+2025-09-06 06:18:49,994 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: INVALID_PARAMETER_VALUE: The run 4c41a381b0114e02ba854a5fce8995e5 must be in the 'active' state. Current state is deleted.
+2025-09-06 06:18:49,994 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:18:49,997 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:18:49,998 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:18:50,002 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:18:50,622 - radiya.models.trainer - INFO - SVM - AUC: 0.8971, Precision: 0.6000, Recall: 0.6000, F1: 0.6000
+2025-09-06 06:18:50,631 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: INVALID_PARAMETER_VALUE: The experiment 2 must be in the 'active' state. Current state is deleted.
+2025-09-06 06:18:50,631 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:18:50,631 - radiya.models.trainer - INFO - أفضل نموذج: LogisticRegression (AUC = 0.9543)
+2025-09-06 06:18:50,633 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: downgrade
+2025-09-06 06:18:50,633 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:18:50,633 - radiya.models.trainer - INFO - توزيع الفئات: {0: 176, 1: 49}
+2025-09-06 06:18:50,640 - radiya.models.trainer - INFO - تم إعداد MLflow experiment: radiya_churn_downgrade
+2025-09-06 06:18:50,641 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:18:50,641 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:18:50,641 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:18:50,642 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:18:50,650 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:18:51,783 - radiya.models.trainer - INFO - RandomForest - AUC: 1.0000, Precision: 1.0000, Recall: 1.0000, F1: 1.0000
+2025-09-06 06:18:53,234 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: INVALID_PARAMETER_VALUE: The run f59adfd020454951a2c1a0d8fd42a1a3 must be in the 'active' state. Current state is deleted.
+2025-09-06 06:18:53,234 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:18:53,238 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:18:53,238 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:18:53,243 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:18:53,976 - radiya.models.trainer - INFO - LogisticRegression - AUC: 1.0000, Precision: 1.0000, Recall: 1.0000, F1: 1.0000
+2025-09-06 06:18:53,987 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: INVALID_PARAMETER_VALUE: The experiment 3 must be in the 'active' state. Current state is deleted.
+2025-09-06 06:18:53,987 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:18:53,987 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:18:53,987 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:18:53,993 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:18:54,920 - radiya.models.trainer - INFO - GradientBoosting - AUC: 1.0000, Precision: 1.0000, Recall: 1.0000, F1: 1.0000
+2025-09-06 06:18:54,927 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: INVALID_PARAMETER_VALUE: The experiment 3 must be in the 'active' state. Current state is deleted.
+2025-09-06 06:18:54,927 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:18:54,932 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:18:54,932 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:18:54,938 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:18:54,985 - radiya.models.trainer - INFO - SVM - AUC: 1.0000, Precision: 1.0000, Recall: 0.9000, F1: 0.9474
+2025-09-06 06:18:54,994 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: INVALID_PARAMETER_VALUE: The experiment 3 must be in the 'active' state. Current state is deleted.
+2025-09-06 06:18:54,994 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:18:54,994 - radiya.models.trainer - INFO - أفضل نموذج: RandomForest (AUC = 1.0000)
+2025-09-06 06:18:54,998 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: combined
+2025-09-06 06:18:54,998 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:18:54,998 - radiya.models.trainer - INFO - توزيع الفئات: {0: 133, 1: 92}
+2025-09-06 06:18:55,006 - radiya.models.trainer - INFO - تم إعداد MLflow experiment: radiya_churn_combined
+2025-09-06 06:18:55,008 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:18:55,008 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:18:55,008 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:18:55,008 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:18:55,016 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:18:55,468 - radiya.models.trainer - INFO - RandomForest - AUC: 0.9239, Precision: 0.6667, Recall: 0.8889, F1: 0.7619
+2025-09-06 06:18:56,928 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:18:56,929 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:18:56,936 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:18:56,936 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:18:56,940 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:18:56,983 - radiya.models.trainer - INFO - LogisticRegression - AUC: 0.9218, Precision: 0.6800, Recall: 0.9444, F1: 0.7907
+2025-09-06 06:18:58,323 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:18:58,323 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:18:58,323 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:18:58,323 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:18:58,329 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:18:58,903 - radiya.models.trainer - INFO - GradientBoosting - AUC: 0.9486, Precision: 0.6800, Recall: 0.9444, F1: 0.7907
+2025-09-06 06:19:00,262 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:19:00,262 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:19:00,267 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:19:00,267 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:19:00,274 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:19:00,337 - radiya.models.trainer - INFO - SVM - AUC: 0.8724, Precision: 0.8125, Recall: 0.7222, F1: 0.7647
+2025-09-06 06:19:01,775 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: INVALID_PARAMETER_VALUE: The run 8646583e0fb043d6b3d55c2455a7d98b must be in the 'active' state. Current state is deleted.
+2025-09-06 06:19:01,775 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:19:01,775 - radiya.models.trainer - INFO - أفضل نموذج: GradientBoosting (AUC = 0.9486)
+2025-09-06 06:19:01,777 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: inactivity
+2025-09-06 06:19:01,777 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:19:01,778 - radiya.models.trainer - INFO - توزيع الفئات: {0: 113, 1: 112}
+2025-09-06 06:19:01,784 - radiya.models.trainer - WARNING - فشل إعداد MLflow: Cannot set a deleted experiment 'radiya_churn_inactivity' as the active experiment. You can restore the experiment, or permanently delete the experiment to create a new one.
+2025-09-06 06:19:01,787 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:19:01,787 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:19:01,787 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:19:01,788 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:19:01,793 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:19:02,232 - radiya.models.trainer - INFO - RandomForest - AUC: 0.8735, Precision: 0.9333, Recall: 0.6364, F1: 0.7568
+2025-09-06 06:19:02,238 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: INVALID_PARAMETER_VALUE: The experiment 4 must be in the 'active' state. Current state is deleted.
+2025-09-06 06:19:02,239 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:19:02,242 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:19:02,242 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:19:02,245 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:19:02,298 - radiya.models.trainer - INFO - LogisticRegression - AUC: 0.8202, Precision: 0.9167, Recall: 0.5000, F1: 0.6471
+2025-09-06 06:19:02,310 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: INVALID_PARAMETER_VALUE: The experiment 4 must be in the 'active' state. Current state is deleted.
+2025-09-06 06:19:02,310 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:19:02,310 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:19:02,311 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:19:02,318 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:19:02,840 - radiya.models.trainer - INFO - GradientBoosting - AUC: 0.8715, Precision: 0.9333, Recall: 0.6364, F1: 0.7568
+2025-09-06 06:19:02,846 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: INVALID_PARAMETER_VALUE: The experiment 4 must be in the 'active' state. Current state is deleted.
+2025-09-06 06:19:02,847 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:19:02,850 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:19:02,850 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:19:02,852 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:19:02,890 - radiya.models.trainer - INFO - SVM - AUC: 0.8617, Precision: 0.9286, Recall: 0.5909, F1: 0.7222
+2025-09-06 06:19:02,899 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: INVALID_PARAMETER_VALUE: The experiment 4 must be in the 'active' state. Current state is deleted.
+2025-09-06 06:19:02,900 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:19:02,900 - radiya.models.trainer - INFO - أفضل نموذج: RandomForest (AUC = 0.8735)
+2025-09-06 06:19:02,900 - radiya_main - INFO - المرحلة 4: عرض النتائج
+2025-09-06 06:19:02,922 - radiya.models.trainer - INFO - تم حفظ أفضل نموذج: /home/radyah/Thmanyah/radhiyah-projct/radhiyah-projct/models/saved_models/best_model_RandomForest_20250906_061902.joblib
+2025-09-06 06:19:02,928 - radiya_main - INFO - انتهى تشغيل المشروع بنجاح

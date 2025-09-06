@@ -1,0 +1,148 @@
+2025-09-06 06:25:18,357 - radiya_main - INFO - بدء تشغيل مشروع رضية
+2025-09-06 06:25:18,357 - radiya_main - INFO - المرحلة 1: تحليل البيانات
+2025-09-06 06:25:18,357 - radiya.data.loader - INFO - تحميل البيانات من: data/raw/customer_churn_mini.json
+2025-09-06 06:25:19,880 - radiya.data.loader - INFO - تم تحميل 286,500 سجل
+2025-09-06 06:25:19,880 - radiya.data.loader - INFO - معالجة أولية للبيانات...
+2025-09-06 06:25:20,049 - radiya.data.loader - INFO - تم حذف 8,346 سجل للمستخدمين المجهولين
+2025-09-06 06:25:20,315 - radiya.data.loader - INFO - البيانات المعالجة: 225 مستخدم، 278,154 سجل
+2025-09-06 06:25:20,691 - radiya_main - INFO - المرحلة 2: هندسة الميزات
+2025-09-06 06:25:20,691 - radiya.data.feature_engineer - INFO - بدء إنشاء الميزات الشاملة...
+2025-09-06 06:25:20,691 - radiya.data.feature_engineer - INFO - إنشاء ميزات المستخدمين...
+2025-09-06 06:25:24,609 - radiya.data.feature_engineer - INFO - تم إنشاء 42 ميزة لـ 225 مستخدم
+2025-09-06 06:25:24,613 - radiya.data.feature_engineer - INFO - تم إنشاء 41 ميزة نهائية
+2025-09-06 06:25:24,613 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: cancellation
+2025-09-06 06:25:24,644 - radiya.data.feature_engineer - INFO - المنسحبين: 52, المعدل: 23.11%
+2025-09-06 06:25:24,645 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: downgrade
+2025-09-06 06:25:24,675 - radiya.data.feature_engineer - INFO - المنسحبين: 49, المعدل: 21.78%
+2025-09-06 06:25:24,675 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: combined
+2025-09-06 06:25:24,717 - radiya.data.feature_engineer - INFO - المنسحبين: 92, المعدل: 40.89%
+2025-09-06 06:25:24,717 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: inactivity
+2025-09-06 06:25:24,751 - radiya.data.feature_engineer - INFO - المنسحبين: 112, المعدل: 49.78%
+2025-09-06 06:25:24,751 - radiya_main - INFO - المرحلة 3: تدريب النماذج
+2025-09-06 06:25:24,753 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: cancellation
+2025-09-06 06:25:24,753 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:25:24,753 - radiya.models.trainer - INFO - توزيع الفئات: {0: 173, 1: 52}
+2025-09-06 06:25:24,776 - radiya.models.trainer - INFO - تم إعداد MLflow experiment: radiya_churn_cancellation
+2025-09-06 06:25:24,777 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:25:24,778 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:25:24,778 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:24,778 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:25:24,887 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:25:26,457 - radiya.models.trainer - INFO - RandomForest - AUC: 0.8943, Precision: 0.7000, Recall: 0.7000, F1: 0.7000
+2025-09-06 06:25:28,428 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:28,428 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:25:28,431 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:28,432 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:25:28,436 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:25:29,292 - radiya.models.trainer - INFO - LogisticRegression - AUC: 0.9543, Precision: 0.7273, Recall: 0.8000, F1: 0.7619
+2025-09-06 06:25:30,973 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:30,973 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:25:30,973 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:30,973 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:25:30,979 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:25:32,480 - radiya.models.trainer - INFO - GradientBoosting - AUC: 0.9229, Precision: 0.7273, Recall: 0.8000, F1: 0.7619
+2025-09-06 06:25:33,983 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:33,983 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:25:33,987 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:33,987 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:25:33,993 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:25:34,691 - radiya.models.trainer - INFO - SVM - AUC: 0.8971, Precision: 0.6000, Recall: 0.6000, F1: 0.6000
+2025-09-06 06:25:36,420 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:36,420 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:25:36,420 - radiya.models.trainer - INFO - أفضل نموذج: LogisticRegression (AUC = 0.9543)
+2025-09-06 06:25:36,422 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: downgrade
+2025-09-06 06:25:36,422 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:25:36,422 - radiya.models.trainer - INFO - توزيع الفئات: {0: 176, 1: 49}
+2025-09-06 06:25:36,435 - radiya.models.trainer - INFO - تم إعداد MLflow experiment: radiya_churn_downgrade
+2025-09-06 06:25:36,437 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:25:36,437 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:25:36,437 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:36,437 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:25:36,445 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:25:37,550 - radiya.models.trainer - INFO - RandomForest - AUC: 1.0000, Precision: 1.0000, Recall: 1.0000, F1: 1.0000
+2025-09-06 06:25:38,937 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:38,937 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:25:38,941 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:38,942 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:25:38,947 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:25:39,729 - radiya.models.trainer - INFO - LogisticRegression - AUC: 1.0000, Precision: 1.0000, Recall: 1.0000, F1: 1.0000
+2025-09-06 06:25:41,275 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:41,275 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:25:41,275 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:41,276 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:25:41,283 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:25:42,237 - radiya.models.trainer - INFO - GradientBoosting - AUC: 1.0000, Precision: 1.0000, Recall: 1.0000, F1: 1.0000
+2025-09-06 06:25:43,742 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:43,743 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:25:43,746 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:43,746 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:25:43,750 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:25:43,795 - radiya.models.trainer - INFO - SVM - AUC: 1.0000, Precision: 1.0000, Recall: 0.9000, F1: 0.9474
+2025-09-06 06:25:45,334 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:45,334 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:25:45,334 - radiya.models.trainer - INFO - أفضل نموذج: RandomForest (AUC = 1.0000)
+2025-09-06 06:25:45,336 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: combined
+2025-09-06 06:25:45,336 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:25:45,337 - radiya.models.trainer - INFO - توزيع الفئات: {0: 133, 1: 92}
+2025-09-06 06:25:45,356 - radiya.models.trainer - INFO - تم إعداد MLflow experiment: radiya_churn_combined
+2025-09-06 06:25:45,357 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:25:45,357 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:25:45,357 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:45,358 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:25:45,363 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:25:45,796 - radiya.models.trainer - INFO - RandomForest - AUC: 0.9239, Precision: 0.6667, Recall: 0.8889, F1: 0.7619
+2025-09-06 06:25:47,120 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:47,121 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:25:47,124 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:47,124 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:25:47,128 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:25:47,181 - radiya.models.trainer - INFO - LogisticRegression - AUC: 0.9218, Precision: 0.6800, Recall: 0.9444, F1: 0.7907
+2025-09-06 06:25:48,657 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:48,657 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:25:48,657 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:48,658 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:25:48,665 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:25:49,226 - radiya.models.trainer - INFO - GradientBoosting - AUC: 0.9486, Precision: 0.6800, Recall: 0.9444, F1: 0.7907
+2025-09-06 06:25:50,457 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:50,457 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:25:50,461 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:50,461 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:25:50,466 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:25:50,512 - radiya.models.trainer - INFO - SVM - AUC: 0.8724, Precision: 0.8125, Recall: 0.7222, F1: 0.7647
+2025-09-06 06:25:51,774 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:51,774 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:25:51,774 - radiya.models.trainer - INFO - أفضل نموذج: GradientBoosting (AUC = 0.9486)
+2025-09-06 06:25:51,776 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: inactivity
+2025-09-06 06:25:51,776 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:25:51,776 - radiya.models.trainer - INFO - توزيع الفئات: {0: 113, 1: 112}
+2025-09-06 06:25:51,790 - radiya.models.trainer - INFO - تم إعداد MLflow experiment: radiya_churn_inactivity
+2025-09-06 06:25:51,791 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:25:51,791 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:25:51,791 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:51,791 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:25:51,794 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:25:52,195 - radiya.models.trainer - INFO - RandomForest - AUC: 0.8735, Precision: 0.9333, Recall: 0.6364, F1: 0.7568
+2025-09-06 06:25:53,432 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:53,433 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:25:53,436 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:53,436 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:25:53,438 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:25:53,494 - radiya.models.trainer - INFO - LogisticRegression - AUC: 0.8202, Precision: 0.9167, Recall: 0.5000, F1: 0.6471
+2025-09-06 06:25:54,928 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:54,928 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:25:54,928 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:54,929 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:25:54,931 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:25:55,399 - radiya.models.trainer - INFO - GradientBoosting - AUC: 0.8715, Precision: 0.9333, Recall: 0.6364, F1: 0.7568
+2025-09-06 06:25:56,639 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:56,639 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:25:56,642 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:25:56,643 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:25:56,645 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:25:56,680 - radiya.models.trainer - INFO - SVM - AUC: 0.8617, Precision: 0.9286, Recall: 0.5909, F1: 0.7222
+2025-09-06 06:25:57,968 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: [Errno 13] Permission denied: '/app'
+2025-09-06 06:25:57,968 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:25:57,968 - radiya.models.trainer - INFO - أفضل نموذج: RandomForest (AUC = 0.8735)
+2025-09-06 06:25:57,969 - radiya_main - INFO - المرحلة 4: عرض النتائج
+2025-09-06 06:25:57,982 - radiya.models.trainer - INFO - تم حفظ أفضل نموذج: /home/radyah/Thmanyah/radhiyah-projct/radhiyah-projct/models/saved_models/best_model_RandomForest_20250906_062557.joblib
+2025-09-06 06:25:57,984 - radiya_main - INFO - انتهى تشغيل المشروع بنجاح

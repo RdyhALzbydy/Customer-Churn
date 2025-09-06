@@ -1,0 +1,56 @@
+Metadata-Version: 2.4
+Name: radiya
+Version: 1.0.0
+Summary: Customer Churn Prediction using Machine Learning
+Author: Your Name
+Author-email: Radiya Team <team@radiya.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/your-username/radiya-project
+Project-URL: Documentation, https://github.com/your-username/radiya-project#readme
+Project-URL: Repository, https://github.com/your-username/radiya-project.git
+Project-URL: Issues, https://github.com/your-username/radiya-project/issues
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: numpy>=1.24.0
+Requires-Dist: scikit-learn>=1.3.0
+Requires-Dist: matplotlib>=3.7.0
+Requires-Dist: seaborn>=0.12.0
+Requires-Dist: fastapi>=0.100.0
+Requires-Dist: uvicorn>=0.23.0
+Requires-Dist: mlflow>=2.5.0
+Requires-Dist: python-multipart>=0.0.6
+Requires-Dist: jinja2>=3.1.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: imbalanced-learn>=0.11.0
+Requires-Dist: joblib>=1.3.0
+Requires-Dist: pathlib>=1.0.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: aiofiles>=23.0.0
+Provides-Extra: dev
+Requires-Dist: ruff>=0.1.0; extra == "dev"
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: isort>=5.12.0; extra == "dev"
+Requires-Dist: mypy>=1.5.0; extra == "dev"
+Requires-Dist: pre-commit>=3.4.0; extra == "dev"
+Requires-Dist: pytest>=7.4.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.1.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "dev"
+Requires-Dist: httpx>=0.24.0; extra == "dev"
+Provides-Extra: prod
+Requires-Dist: gunicorn>=21.0.0; extra == "prod"
+Requires-Dist: psycopg2-binary>=2.9.0; extra == "prod"
+Requires-Dist: redis>=4.6.0; extra == "prod"
+Dynamic: author
+Dynamic: requires-python
+
+# Customer-Churn

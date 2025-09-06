@@ -1,0 +1,148 @@
+2025-09-06 06:12:24,346 - radiya_main - INFO - بدء تشغيل مشروع رضية
+2025-09-06 06:12:24,346 - radiya_main - INFO - المرحلة 1: تحليل البيانات
+2025-09-06 06:12:24,346 - radiya.data.loader - INFO - تحميل البيانات من: data/raw/customer_churn_mini.json
+2025-09-06 06:12:26,048 - radiya.data.loader - INFO - تم تحميل 286,500 سجل
+2025-09-06 06:12:26,048 - radiya.data.loader - INFO - معالجة أولية للبيانات...
+2025-09-06 06:12:26,205 - radiya.data.loader - INFO - تم حذف 8,346 سجل للمستخدمين المجهولين
+2025-09-06 06:12:26,458 - radiya.data.loader - INFO - البيانات المعالجة: 225 مستخدم، 278,154 سجل
+2025-09-06 06:12:26,953 - radiya_main - INFO - المرحلة 2: هندسة الميزات
+2025-09-06 06:12:26,954 - radiya.data.feature_engineer - INFO - بدء إنشاء الميزات الشاملة...
+2025-09-06 06:12:26,954 - radiya.data.feature_engineer - INFO - إنشاء ميزات المستخدمين...
+2025-09-06 06:12:30,625 - radiya.data.feature_engineer - INFO - تم إنشاء 42 ميزة لـ 225 مستخدم
+2025-09-06 06:12:30,629 - radiya.data.feature_engineer - INFO - تم إنشاء 41 ميزة نهائية
+2025-09-06 06:12:30,629 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: cancellation
+2025-09-06 06:12:30,658 - radiya.data.feature_engineer - INFO - المنسحبين: 52, المعدل: 23.11%
+2025-09-06 06:12:30,658 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: downgrade
+2025-09-06 06:12:30,689 - radiya.data.feature_engineer - INFO - المنسحبين: 49, المعدل: 21.78%
+2025-09-06 06:12:30,689 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: combined
+2025-09-06 06:12:30,734 - radiya.data.feature_engineer - INFO - المنسحبين: 92, المعدل: 40.89%
+2025-09-06 06:12:30,734 - radiya.data.feature_engineer - INFO - تعريف الانسحاب بطريقة: inactivity
+2025-09-06 06:12:30,769 - radiya.data.feature_engineer - INFO - المنسحبين: 112, المعدل: 49.78%
+2025-09-06 06:12:30,769 - radiya_main - INFO - المرحلة 3: تدريب النماذج
+2025-09-06 06:12:30,770 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: cancellation
+2025-09-06 06:12:30,770 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:12:30,770 - radiya.models.trainer - INFO - توزيع الفئات: {0: 173, 1: 52}
+2025-09-06 06:12:30,792 - radiya.models.trainer - INFO - تم إعداد MLflow experiment: radiya_churn_cancellation
+2025-09-06 06:12:30,793 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:12:30,794 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:12:30,794 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:30,794 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:12:30,820 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:12:32,164 - radiya.models.trainer - INFO - RandomForest - AUC: 0.8943, Precision: 0.7000, Recall: 0.7000, F1: 0.7000
+2025-09-06 06:12:32,260 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:32,260 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:12:32,265 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:32,265 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:12:32,272 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:12:33,003 - radiya.models.trainer - INFO - LogisticRegression - AUC: 0.9543, Precision: 0.7273, Recall: 0.8000, F1: 0.7619
+2025-09-06 06:12:33,066 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:33,066 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:12:33,066 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:33,067 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:12:33,075 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:12:34,340 - radiya.models.trainer - INFO - GradientBoosting - AUC: 0.9229, Precision: 0.7273, Recall: 0.8000, F1: 0.7619
+2025-09-06 06:12:34,390 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:34,390 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:12:34,393 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:34,393 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 138, 1: 42}
+2025-09-06 06:12:34,397 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 138, 0: 138}
+2025-09-06 06:12:35,027 - radiya.models.trainer - INFO - SVM - AUC: 0.8971, Precision: 0.6000, Recall: 0.6000, F1: 0.6000
+2025-09-06 06:12:35,079 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:35,079 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:12:35,079 - radiya.models.trainer - INFO - أفضل نموذج: LogisticRegression (AUC = 0.9543)
+2025-09-06 06:12:35,081 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: downgrade
+2025-09-06 06:12:35,081 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:12:35,081 - radiya.models.trainer - INFO - توزيع الفئات: {0: 176, 1: 49}
+2025-09-06 06:12:35,095 - radiya.models.trainer - INFO - تم إعداد MLflow experiment: radiya_churn_downgrade
+2025-09-06 06:12:35,096 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:12:35,096 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:12:35,096 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:35,096 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:12:35,102 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:12:36,087 - radiya.models.trainer - INFO - RandomForest - AUC: 1.0000, Precision: 1.0000, Recall: 1.0000, F1: 1.0000
+2025-09-06 06:12:36,136 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:36,137 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:12:36,140 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:36,140 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:12:36,147 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:12:36,810 - radiya.models.trainer - INFO - LogisticRegression - AUC: 1.0000, Precision: 1.0000, Recall: 1.0000, F1: 1.0000
+2025-09-06 06:12:36,862 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:36,862 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:12:36,862 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:36,863 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:12:36,868 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:12:37,562 - radiya.models.trainer - INFO - GradientBoosting - AUC: 1.0000, Precision: 1.0000, Recall: 1.0000, F1: 1.0000
+2025-09-06 06:12:37,604 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:37,604 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:12:37,607 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:37,607 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 141, 1: 39}
+2025-09-06 06:12:37,611 - radiya.models.trainer - INFO - التوزيع الجديد: {1: 141, 0: 141}
+2025-09-06 06:12:37,664 - radiya.models.trainer - INFO - SVM - AUC: 1.0000, Precision: 1.0000, Recall: 0.9000, F1: 0.9474
+2025-09-06 06:12:37,712 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:37,712 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:12:37,712 - radiya.models.trainer - INFO - أفضل نموذج: RandomForest (AUC = 1.0000)
+2025-09-06 06:12:37,715 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: combined
+2025-09-06 06:12:37,715 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:12:37,716 - radiya.models.trainer - INFO - توزيع الفئات: {0: 133, 1: 92}
+2025-09-06 06:12:37,736 - radiya.models.trainer - INFO - تم إعداد MLflow experiment: radiya_churn_combined
+2025-09-06 06:12:37,737 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:12:37,737 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:12:37,737 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:37,737 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:12:37,743 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:12:38,212 - radiya.models.trainer - INFO - RandomForest - AUC: 0.9239, Precision: 0.6667, Recall: 0.8889, F1: 0.7619
+2025-09-06 06:12:38,255 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:38,256 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:12:38,262 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:38,262 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:12:38,267 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:12:38,331 - radiya.models.trainer - INFO - LogisticRegression - AUC: 0.9218, Precision: 0.6800, Recall: 0.9444, F1: 0.7907
+2025-09-06 06:12:38,396 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:38,396 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:12:38,396 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:38,396 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:12:38,404 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:12:39,039 - radiya.models.trainer - INFO - GradientBoosting - AUC: 0.9486, Precision: 0.6800, Recall: 0.9444, F1: 0.7907
+2025-09-06 06:12:39,092 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:39,092 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:12:39,096 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:39,096 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 106, 1: 74}
+2025-09-06 06:12:39,101 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 106, 1: 106}
+2025-09-06 06:12:39,150 - radiya.models.trainer - INFO - SVM - AUC: 0.8724, Precision: 0.8125, Recall: 0.7222, F1: 0.7647
+2025-09-06 06:12:39,196 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:39,196 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:12:39,196 - radiya.models.trainer - INFO - أفضل نموذج: GradientBoosting (AUC = 0.9486)
+2025-09-06 06:12:39,198 - radiya.models.trainer - INFO - بدء تدريب جميع النماذج - تجربة: inactivity
+2025-09-06 06:12:39,198 - radiya.models.trainer - INFO - شكل البيانات: (225, 41)
+2025-09-06 06:12:39,198 - radiya.models.trainer - INFO - توزيع الفئات: {0: 113, 1: 112}
+2025-09-06 06:12:39,210 - radiya.models.trainer - INFO - تم إعداد MLflow experiment: radiya_churn_inactivity
+2025-09-06 06:12:39,211 - radiya.models.trainer - INFO - بيانات التدريب: (180, 41), الاختبار: (45, 41)
+2025-09-06 06:12:39,211 - radiya.models.trainer - INFO - تدريب نموذج: RandomForest
+2025-09-06 06:12:39,212 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:39,212 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:12:39,214 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:12:39,626 - radiya.models.trainer - INFO - RandomForest - AUC: 0.8735, Precision: 0.9333, Recall: 0.6364, F1: 0.7568
+2025-09-06 06:12:39,673 - radiya.models.trainer - WARNING - فشل تسجيل RandomForest في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:39,673 - radiya.models.trainer - INFO - تدريب نموذج: LogisticRegression
+2025-09-06 06:12:39,679 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:39,679 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:12:39,682 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:12:39,739 - radiya.models.trainer - INFO - LogisticRegression - AUC: 0.8202, Precision: 0.9167, Recall: 0.5000, F1: 0.6471
+2025-09-06 06:12:39,805 - radiya.models.trainer - WARNING - فشل تسجيل LogisticRegression في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:39,805 - radiya.models.trainer - INFO - تدريب نموذج: GradientBoosting
+2025-09-06 06:12:39,805 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:39,806 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:12:39,810 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:12:40,329 - radiya.models.trainer - INFO - GradientBoosting - AUC: 0.8715, Precision: 0.9333, Recall: 0.6364, F1: 0.7568
+2025-09-06 06:12:40,374 - radiya.models.trainer - WARNING - فشل تسجيل GradientBoosting في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:40,375 - radiya.models.trainer - INFO - تدريب نموذج: SVM
+2025-09-06 06:12:40,378 - radiya.models.trainer - INFO - معالجة عدم التوازن باستخدام: smote
+2025-09-06 06:12:40,378 - radiya.models.trainer - INFO - التوزيع الأصلي: {0: 90, 1: 90}
+2025-09-06 06:12:40,380 - radiya.models.trainer - INFO - التوزيع الجديد: {0: 90, 1: 90}
+2025-09-06 06:12:40,416 - radiya.models.trainer - INFO - SVM - AUC: 0.8617, Precision: 0.9286, Recall: 0.5909, F1: 0.7222
+2025-09-06 06:12:40,471 - radiya.models.trainer - WARNING - فشل تسجيل SVM في MLflow: float() argument must be a string or a real number, not 'list'
+2025-09-06 06:12:40,472 - radiya.models.trainer - INFO - انتهى تدريب جميع النماذج
+2025-09-06 06:12:40,472 - radiya.models.trainer - INFO - أفضل نموذج: RandomForest (AUC = 0.8735)
+2025-09-06 06:12:40,472 - radiya_main - INFO - المرحلة 4: عرض النتائج
+2025-09-06 06:12:40,492 - radiya.models.trainer - INFO - تم حفظ أفضل نموذج: /home/radyah/Thmanyah/radhiyah-projct/radhiyah-projct/models/saved_models/best_model_RandomForest_20250906_061240.joblib
+2025-09-06 06:12:40,496 - radiya_main - INFO - انتهى تشغيل المشروع بنجاح

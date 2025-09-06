@@ -1,0 +1,22 @@
+artifact_path: /home/radyah/Thmanyah/radhiyah-projct/radhiyah-projct/mlruns/5/models/m-54045442086745909bd7e961c5474dd1/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.3
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.1
+mlflow_version: 3.3.1
+model_id: m-54045442086745909bd7e961c5474dd1
+model_size_bytes: 266432
+model_uuid: m-54045442086745909bd7e961c5474dd1
+prompts: null
+run_id: 32ddef71283f4b93b5f495bc7e3e2ec0
+utc_time_created: '2025-09-06 03:20:26.674468'

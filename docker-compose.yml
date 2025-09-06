@@ -19,7 +19,7 @@ services:
       - LOG_LEVEL=INFO
       - DATA_PATH=data/raw/customer_churn_mini.json
       - MODEL_SAVE_PATH=models/saved_models/
-      - MLFLOW_TRACKING_URI=http://mlflow:5500
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
     depends_on:
       - mlflow
     restart: unless-stopped
@@ -39,7 +39,7 @@ services:
     environment:
       - PYTHONPATH=/app
       - DATA_PATH=data/raw/customer_churn_mini.json
-      - MLFLOW_TRACKING_URI=http://mlflow:5500
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
     command: python run_radiya.py
     depends_on:
       - mlflow
@@ -52,7 +52,7 @@ services:
     image: python:3.9
     container_name: radiya_mlflow
     ports:
-      - "5500:5500"
+      - "5000:5000"
     volumes:
       - ./mlruns:/app/mlruns
       - ./mlflow_data:/app/data:z
@@ -62,11 +62,12 @@ services:
       - MLFLOW_ARTIFACTS_DESTINATION=/app/mlruns
     command: >
       bash -c "pip install mlflow && 
-               mlflow server --host 0.0.0.0 --port 5500 --backend-store-uri sqlite:////app/data/mlflow.db --default-artifact-root /app/mlruns"
+               mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:////app/data/mlflow.db --default-artifact-root /app/mlruns"
     restart: unless-stopped
     networks:
       - radiya-network
     profiles:
+      - training
       - mlflow
 
   nginx:

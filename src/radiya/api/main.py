@@ -1,14 +1,14 @@
-from fastapi import FastAPI, Request, HTTPException
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse, FileResponse
-import uvicorn
-import os
 from pathlib import Path
 
+import uvicorn
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+
 # استيراد المسارات
-from .routes import prediction, analysis, upload
+from .routes import analysis, prediction, upload
+# from .routes import scheduler  # مؤجل مؤقتاً
 
 app = FastAPI(
     title="Radiya - Customer Churn Prediction API",
@@ -34,6 +34,7 @@ if static_path.exists():
 app.include_router(prediction.router, prefix="/api/v1", tags=["prediction"])
 app.include_router(analysis.router, prefix="/api/v1", tags=["analysis"])
 app.include_router(upload.router, prefix="/api/v1", tags=["upload"])
+# app.include_router(scheduler.router, prefix="/api/v1", tags=["scheduler"])  # مؤجل مؤقتاً
 
 # صفحة رفع البيانات
 @app.get("/upload", response_class=HTMLResponse)
@@ -59,20 +60,20 @@ async def upload_page():
                 --gray: #6b7280;
                 --light: #f9fafb;
             }
-            
+
             * {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
             }
-            
+
             body {
                 font-family: 'Cairo', sans-serif;
                 background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
                 min-height: 100vh;
                 padding: 20px;
             }
-            
+
             .container {
                 max-width: 800px;
                 margin: 0 auto;
@@ -81,23 +82,23 @@ async def upload_page():
                 padding: 40px;
                 box-shadow: 0 25px 50px rgba(0,0,0,0.15);
             }
-            
+
             .header {
                 text-align: center;
                 margin-bottom: 40px;
             }
-            
+
             .header h1 {
                 color: var(--primary);
                 font-size: 2.5rem;
                 margin-bottom: 10px;
             }
-            
+
             .header p {
                 color: var(--gray);
                 font-size: 1.1rem;
             }
-            
+
             .upload-area {
                 border: 3px dashed var(--primary);
                 border-radius: 15px;
@@ -107,30 +108,30 @@ async def upload_page():
                 margin-bottom: 30px;
                 cursor: pointer;
             }
-            
+
             .upload-area:hover, .upload-area.dragover {
                 border-color: var(--secondary);
                 background: rgba(102, 126, 234, 0.05);
                 transform: scale(1.02);
             }
-            
+
             .upload-area i {
                 font-size: 4rem;
                 color: var(--primary);
                 margin-bottom: 20px;
             }
-            
+
             .upload-area h3 {
                 color: var(--dark);
                 margin-bottom: 10px;
                 font-size: 1.3rem;
             }
-            
+
             .upload-area p {
                 color: var(--gray);
                 margin-bottom: 20px;
             }
-            
+
             .btn {
                 background: linear-gradient(135deg, var(--primary), var(--secondary));
                 color: white;
@@ -145,17 +146,17 @@ async def upload_page():
                 align-items: center;
                 gap: 8px;
             }
-            
+
             .btn:hover {
                 transform: translateY(-2px);
                 box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
             }
-            
+
             .btn:disabled {
                 opacity: 0.5;
                 cursor: not-allowed;
             }
-            
+
             .file-info {
                 background: var(--light);
                 padding: 20px;
@@ -163,20 +164,20 @@ async def upload_page():
                 margin: 20px 0;
                 display: none;
             }
-            
+
             .file-info.show {
                 display: block;
             }
-            
+
             .progress-container {
                 display: none;
                 margin: 20px 0;
             }
-            
+
             .progress-container.show {
                 display: block;
             }
-            
+
             .progress-bar {
                 background: #e5e7eb;
                 border-radius: 10px;
@@ -184,14 +185,14 @@ async def upload_page():
                 margin: 15px 0;
                 overflow: hidden;
             }
-            
+
             .progress-fill {
                 background: linear-gradient(90deg, var(--success), var(--primary));
                 height: 100%;
                 width: 0%;
                 transition: width 0.3s ease;
             }
-            
+
             .progress-info {
                 display: flex;
                 justify-content: space-between;
@@ -199,7 +200,7 @@ async def upload_page():
                 color: var(--gray);
                 font-size: 0.9rem;
             }
-            
+
             .results {
                 display: none;
                 margin-top: 30px;
@@ -207,11 +208,11 @@ async def upload_page():
                 background: var(--light);
                 border-radius: 15px;
             }
-            
+
             .results.show {
                 display: block;
             }
-            
+
             .alert {
                 padding: 15px;
                 border-radius: 10px;
@@ -220,32 +221,32 @@ async def upload_page():
                 align-items: center;
                 gap: 10px;
             }
-            
+
             .alert-success {
                 background: rgba(16, 185, 129, 0.1);
                 color: var(--success);
                 border: 1px solid rgba(16, 185, 129, 0.2);
             }
-            
+
             .alert-error {
                 background: rgba(239, 68, 68, 0.1);
                 color: var(--danger);
                 border: 1px solid rgba(239, 68, 68, 0.2);
             }
-            
+
             .alert-warning {
                 background: rgba(245, 158, 11, 0.1);
                 color: var(--warning);
                 border: 1px solid rgba(245, 158, 11, 0.2);
             }
-            
+
             .stats-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 15px;
                 margin: 20px 0;
             }
-            
+
             .stat-card {
                 background: white;
                 padding: 20px;
@@ -253,37 +254,37 @@ async def upload_page():
                 text-align: center;
                 box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             }
-            
+
             .stat-value {
                 font-size: 2rem;
                 font-weight: 700;
                 color: var(--primary);
                 margin-bottom: 5px;
             }
-            
+
             .stat-label {
                 color: var(--gray);
                 font-size: 0.9rem;
             }
-            
+
             .hidden {
                 display: none;
             }
-            
+
             @media (max-width: 768px) {
                 .container {
                     margin: 10px;
                     padding: 20px;
                 }
-                
+
                 .upload-area {
                     padding: 40px 15px;
                 }
-                
+
                 .header h1 {
                     font-size: 2rem;
                 }
-                
+
                 .stats-grid {
                     grid-template-columns: 1fr;
                 }
@@ -299,7 +300,7 @@ async def upload_page():
                     <i class="fas fa-home"></i> العودة للرئيسية
                 </a>
             </div>
-            
+
             <div class="upload-area" id="uploadArea">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <h3>اسحب الملف هنا أو اضغط للاختيار</h3>
@@ -310,7 +311,7 @@ async def upload_page():
                     اختر الملف
                 </button>
             </div>
-            
+
             <div class="file-info" id="fileInfo">
                 <h4><i class="fas fa-file-alt"></i> معلومات الملف</h4>
                 <p id="fileName"></p>
@@ -324,7 +325,7 @@ async def upload_page():
                     إلغاء
                 </button>
             </div>
-            
+
             <div class="progress-container" id="progressContainer">
                 <div class="progress-info">
                     <span id="progressText">جاري الرفع...</span>
@@ -337,7 +338,7 @@ async def upload_page():
                     <small id="currentStep">تحضير البيانات...</small>
                 </div>
             </div>
-            
+
             <div class="results" id="results">
                 <h3><i class="fas fa-chart-bar"></i> نتائج التحليل</h3>
                 <div id="alertContainer"></div>
@@ -355,106 +356,106 @@ async def upload_page():
                 </div>
             </div>
         </div>
-        
+
         <script>
             let selectedFile = null;
             let currentJobId = null;
             let pollingInterval = null;
-            
+
             // إعداد drag and drop
             const uploadArea = document.getElementById('uploadArea');
             const fileInput = document.getElementById('fileInput');
-            
+
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 uploadArea.addEventListener(eventName, preventDefaults, false);
                 document.body.addEventListener(eventName, preventDefaults, false);
             });
-            
+
             ['dragenter', 'dragover'].forEach(eventName => {
                 uploadArea.addEventListener(eventName, () => uploadArea.classList.add('dragover'), false);
             });
-            
+
             ['dragleave', 'drop'].forEach(eventName => {
                 uploadArea.addEventListener(eventName, () => uploadArea.classList.remove('dragover'), false);
             });
-            
+
             uploadArea.addEventListener('drop', handleDrop, false);
             fileInput.addEventListener('change', handleFileSelect, false);
-            
+
             function preventDefaults(e) {
                 e.preventDefault();
                 e.stopPropagation();
             }
-            
+
             function handleDrop(e) {
                 const files = e.dataTransfer.files;
                 if (files.length > 0) {
                     selectFile(files[0]);
                 }
             }
-            
+
             function handleFileSelect(e) {
                 if (e.target.files.length > 0) {
                     selectFile(e.target.files[0]);
                 }
             }
-            
+
             function selectFile(file) {
                 const allowedTypes = ['.json', '.csv'];
                 const fileName = file.name.toLowerCase();
                 const isValidType = allowedTypes.some(type => fileName.endsWith(type));
-                
+
                 if (!isValidType) {
                     showAlert('نوع الملف غير مدعوم. يرجى رفع ملف JSON أو CSV', 'error');
                     return;
                 }
-                
+
                 const fileSizeMB = file.size / (1024 * 1024);
                 if (fileSizeMB > 129) {
                     showAlert(`حجم الملف كبير جداً (${fileSizeMB.toFixed(1)} MB). الحد الأقصى 129 MB`, 'error');
                     return;
                 }
-                
+
                 selectedFile = file;
-                
+
                 document.getElementById('fileName').textContent = `الاسم: ${file.name}`;
                 document.getElementById('fileSize').textContent = `الحجم: ${formatFileSize(file.size)}`;
                 document.getElementById('fileInfo').classList.add('show');
-                
+
                 showAlert(`تم اختيار الملف: ${file.name}`, 'success');
             }
-            
+
             async function uploadFile() {
                 if (!selectedFile) {
                     showAlert('يرجى اختيار ملف أولاً', 'warning');
                     return;
                 }
-                
+
                 const formData = new FormData();
                 formData.append('file', selectedFile);
-                
+
                 try {
                     document.getElementById('progressContainer').classList.add('show');
                     document.getElementById('fileInfo').classList.remove('show');
-                    
+
                     updateProgress(0, 'جاري رفع الملف...', 'رفع الملف...');
-                    
+
                     const response = await fetch('/api/v1/upload', {
                         method: 'POST',
                         body: formData
                     });
-                    
+
                     const result = await response.json();
-                    
+
                     if (!response.ok) {
                         throw new Error(result.detail || 'خطأ في رفع الملف');
                     }
-                    
+
                     currentJobId = result.job_id;
                     showAlert(`تم رفع الملف بنجاح! جاري المعالجة...`, 'success');
-                    
+
                     startPolling();
-                    
+
                 } catch (error) {
                     console.error('خطأ في الرفع:', error);
                     showAlert(`خطأ في رفع الملف: ${error.message}`, 'error');
@@ -462,19 +463,19 @@ async def upload_page():
                     document.getElementById('fileInfo').classList.add('show');
                 }
             }
-            
+
             function startPolling() {
                 if (pollingInterval) {
                     clearInterval(pollingInterval);
                 }
-                
+
                 pollingInterval = setInterval(async () => {
                     try {
                         const response = await fetch(`/api/v1/status/${currentJobId}`);
                         const status = await response.json();
-                        
+
                         updateProgress(status.progress, status.current_step, `${status.progress}%`);
-                        
+
                         if (status.status === 'completed') {
                             clearInterval(pollingInterval);
                             showResults(status.results);
@@ -484,7 +485,7 @@ async def upload_page():
                             showAlert(`خطأ في المعالجة: ${status.error}`, 'error');
                             document.getElementById('progressContainer').classList.remove('show');
                         }
-                        
+
                     } catch (error) {
                         console.error('خطأ في مراقبة التقدم:', error);
                         clearInterval(pollingInterval);
@@ -492,16 +493,16 @@ async def upload_page():
                     }
                 }, 2000);
             }
-            
+
             function updateProgress(percent, step, percentText) {
                 document.getElementById('progressFill').style.width = percent + '%';
                 document.getElementById('progressPercent').textContent = percentText;
                 document.getElementById('currentStep').textContent = step;
             }
-            
+
             function showResults(results) {
                 document.getElementById('progressContainer').classList.remove('show');
-                
+
                 const statsHtml = `
                     <div class="stat-card">
                         <div class="stat-value">${results.data_summary.total_records.toLocaleString()}</div>
@@ -520,9 +521,9 @@ async def upload_page():
                         <div class="stat-label">أفضل دقة</div>
                     </div>
                 `;
-                
+
                 document.getElementById('statsGrid').innerHTML = statsHtml;
-                
+
                 let alertsHtml = '';
                 results.recommendations.forEach(rec => {
                     const alertType = rec.type === 'urgent' ? 'error' : rec.type === 'warning' ? 'warning' : 'success';
@@ -536,9 +537,9 @@ async def upload_page():
                         </div>
                     `;
                 });
-                
+
                 document.getElementById('alertContainer').innerHTML = alertsHtml;
-                
+
                 let modelsHtml = '<h4>أداء النماذج:</h4><div style="display: grid; gap: 15px;">';
                 Object.entries(results.best_models).forEach(([method, model]) => {
                     modelsHtml += `
@@ -549,13 +550,13 @@ async def upload_page():
                     `;
                 });
                 modelsHtml += '</div>';
-                
+
                 document.getElementById('detailedResults').innerHTML = modelsHtml;
                 document.getElementById('results').classList.add('show');
-                
+
                 window.analysisResults = results;
             }
-            
+
             function showAlert(message, type = 'success') {
                 const alertContainer = document.getElementById('alertContainer');
                 const iconMap = {
@@ -563,23 +564,23 @@ async def upload_page():
                     error: 'times-circle',
                     warning: 'exclamation-triangle'
                 };
-                
+
                 const alert = document.createElement('div');
                 alert.className = `alert alert-${type}`;
                 alert.innerHTML = `
                     <i class="fas fa-${iconMap[type]}"></i>
                     <span>${message}</span>
                 `;
-                
+
                 alertContainer.appendChild(alert);
-                
+
                 setTimeout(() => {
                     if (alert.parentNode) {
                         alert.parentNode.removeChild(alert);
                     }
                 }, 5000);
             }
-            
+
             function formatFileSize(bytes) {
                 if (bytes === 0) return '0 Bytes';
                 const k = 1024;
@@ -587,25 +588,25 @@ async def upload_page():
                 const i = Math.floor(Math.log(bytes) / Math.log(k));
                 return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
             }
-            
+
             function resetUpload() {
                 selectedFile = null;
                 currentJobId = null;
-                
+
                 if (pollingInterval) {
                     clearInterval(pollingInterval);
                     pollingInterval = null;
                 }
-                
+
                 document.getElementById('fileInfo').classList.remove('show');
                 document.getElementById('progressContainer').classList.remove('show');
                 document.getElementById('results').classList.remove('show');
                 document.getElementById('fileInput').value = '';
                 document.getElementById('alertContainer').innerHTML = '';
-                
+
                 showAlert('تم إعادة تعيين النموذج', 'success');
             }
-            
+
             function downloadResults() {
                 if (window.analysisResults) {
                     const dataStr = JSON.stringify(window.analysisResults, null, 2);
@@ -616,13 +617,13 @@ async def upload_page():
                     link.download = `radiya_analysis_${new Date().toISOString().slice(0, 19)}.json`;
                     link.click();
                     URL.revokeObjectURL(url);
-                    
+
                     showAlert('تم تحميل التقرير بنجاح', 'success');
                 } else {
                     showAlert('لا توجد نتائج للتحميل', 'warning');
                 }
             }
-            
+
             document.addEventListener('DOMContentLoaded', () => {
                 showAlert('مرحباً بك في نظام رضية! ارفع ملف البيانات للبدء', 'success');
             });
@@ -774,7 +775,7 @@ async def home():
             </div>
             <h1>رضية</h1>
             <p class="subtitle">نظام التنبؤ بانسحاب العملاء باستخدام الذكاء الاصطناعي</p>
-            
+
             <div class="stats">
                 <div class="stat">
                     <span class="stat-number">87%</span>
@@ -789,7 +790,7 @@ async def home():
                     <div class="stat-label">حجم الملف الأقصى</div>
                 </div>
             </div>
-            
+
             <div class="features">
                 <div class="feature">
                     <h3><i class="fas fa-upload"></i> رفع البيانات</h3>
@@ -804,7 +805,7 @@ async def home():
                     <p>احصل على تقارير مفصلة مع توصيات عملية للاحتفاظ بالعملاء</p>
                 </div>
             </div>
-            
+
             <div>
                 <a href="/upload" class="btn btn-primary">
                     <i class="fas fa-rocket"></i>
